@@ -4,9 +4,10 @@ import Sidebar from './components/Sidebar.jsx'
 import Topbar from './components/Topbar.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Files from './pages/Files.jsx'
+import Todos from './pages/Todos.jsx'
 import Login from './pages/Login.jsx'
 
-const TITLES = { dashboard: 'Dashboard', files: 'Design Files' }
+const TITLES = { dashboard: 'Dashboard', todos: 'Aufgaben', files: 'Design Files' }
 
 export default function App() {
   const [page, setPage]         = useState('dashboard')
@@ -43,6 +44,7 @@ export default function App() {
         <Topbar title={TITLES[page]} />
         <div style={{ flex:1, padding:'20px 28px 32px', overflowY:'auto' }}>
           {page === 'dashboard' && <Dashboard />}
+          {page === 'todos'     && <Todos />}
           {page === 'files'     && <Files />}
         </div>
       </div>

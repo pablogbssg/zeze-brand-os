@@ -1,5 +1,6 @@
 const NAV = [
-  { id: 'dashboard', label: 'Dashboard',   color: '#007AFF' },
+  { id: 'dashboard', label: 'Dashboard',    color: '#007AFF' },
+  { id: 'todos',     label: 'Aufgaben',     color: '#FF9F0A' },
   { id: 'files',     label: 'Design Files', color: '#AF52DE' },
 ]
 
