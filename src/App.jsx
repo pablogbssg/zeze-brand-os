@@ -2,15 +2,14 @@ import { useState, useEffect } from 'react'
 import { supabase } from './supabase.js'
 import Sidebar from './components/Sidebar.jsx'
 import Topbar from './components/Topbar.jsx'
-import Calendar from './pages/Calendar.jsx'
+import Dashboard from './pages/Dashboard.jsx'
 import Files from './pages/Files.jsx'
-import Todos from './pages/Todos.jsx'
 import Login from './pages/Login.jsx'
 
-const TITLES = { calendar: 'Kalender', files: 'Design Files', todos: 'Aufgaben' }
+const TITLES = { dashboard: 'Dashboard', files: 'Design Files' }
 
 export default function App() {
-  const [page, setPage]         = useState('calendar')
+  const [page, setPage]         = useState('dashboard')
   const [session, setSession]   = useState(null)
   const [checking, setChecking] = useState(true)
 
@@ -43,9 +42,8 @@ export default function App() {
       <div style={{ display:'flex', flexDirection:'column', minHeight:'100vh', overflow:'hidden' }}>
         <Topbar title={TITLES[page]} />
         <div style={{ flex:1, padding:'20px 28px 32px', overflowY:'auto' }}>
-          {page === 'calendar' && <Calendar />}
-          {page === 'files'    && <Files />}
-          {page === 'todos'    && <Todos />}
+          {page === 'dashboard' && <Dashboard />}
+          {page === 'files'     && <Files />}
         </div>
       </div>
     </div>
