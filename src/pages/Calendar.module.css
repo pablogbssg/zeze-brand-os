@@ -1,0 +1,160 @@
+.wrap { }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.month {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.navBtns {
+  display: flex;
+  gap: 6px;
+}
+
+.navBtns button {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.12s;
+}
+
+.navBtns button:hover {
+  background: var(--blue2);
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.dayName {
+  text-align: center;
+  padding: 10px 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.cell {
+  min-height: 80px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  transition: background 0.1s;
+}
+
+.cell:hover {
+  background: var(--bg);
+}
+
+.cell:nth-child(7n) {
+  border-right: none;
+}
+
+.other {
+  opacity: 0.3;
+}
+
+.today .dayNum {
+  background: var(--blue);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dayNum {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event {
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 2px 6px;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c0 { background: var(--blue2); color: var(--blue); }
+.c1 { background: var(--orange2); color: var(--orange); }
+.c2 { background: var(--purple2); color: var(--purple); }
+.c3 { background: var(--green2); color: var(--green); }
+
+.addRow {
+  display: flex;
+  gap: 8px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  background: var(--card);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.12s;
+}
+
+.input:focus {
+  border-color: var(--blue);
+}
+
+.btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+
+.btn:hover {
+  background: #0066DD;
+}

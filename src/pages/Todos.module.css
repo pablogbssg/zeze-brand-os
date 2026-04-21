@@ -1,0 +1,203 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.blockHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.blockTitle {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.badgeDay {
+  background: var(--orange2);
+  color: var(--orange);
+}
+
+.badgeWeek {
+  background: var(--purple2);
+  color: var(--purple);
+}
+
+.list {
+  flex: 1;
+  margin-bottom: 12px;
+  min-height: 80px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  transition: opacity 0.15s;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item:hover .del {
+  opacity: 1;
+}
+
+.check {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  font-size: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  transition: 0.12s;
+}
+
+.check:hover {
+  border-color: var(--green);
+}
+
+.checked {
+  background: var(--green) !important;
+  border-color: var(--green) !important;
+}
+
+.itemBody {
+  flex: 1;
+}
+
+.itemText {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  color: var(--text3);
+}
+
+.prioTag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.prioH { background: var(--red2); color: var(--red); }
+.prioM { background: var(--orange2); color: var(--orange); }
+.prioL { background: var(--green2); color: var(--green); }
+
+.del {
+  background: none;
+  border: none;
+  font-size: 10px;
+  color: var(--text3);
+  cursor: pointer;
+  opacity: 0;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: 0.12s;
+  margin-top: 2px;
+}
+
+.del:hover {
+  background: var(--red2);
+  color: var(--red);
+  opacity: 1;
+}
+
+.empty {
+  font-size: 12px;
+  color: var(--text3);
+  padding: 16px 0;
+}
+
+.addRow {
+  display: flex;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 12px;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.12s;
+  min-width: 0;
+}
+
+.input:focus {
+  border-color: var(--blue);
+}
+
+.select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 8px;
+  font-size: 12px;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+}
+
+.btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.12s;
+  flex-shrink: 0;
+}
+
+.btn:hover {
+  background: #0066DD;
+}
