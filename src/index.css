@@ -1,26 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap');
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F5F5F7;
-  --card: #FFFFFF;
-  --border: #E5E5EA;
-  --text: #1D1D1F;
-  --text2: #6E6E73;
-  --text3: #AEAEB2;
-  --blue: #007AFF;
-  --blue2: #E8F1FF;
-  --green: #34C759;
-  --green2: #E4F8EA;
-  --orange: #FF9F0A;
-  --orange2: #FFF3DC;
-  --purple: #AF52DE;
-  --purple2: #F3E8FF;
-  --red: #FF3B30;
-  --red2: #FFECEC;
+  --bg: #0D0D0D;
+  --bg2: #111111;
+  --bg3: #1A1A1A;
+  --border: #222222;
+  --border2: #2A2A2A;
+  --text: #EEEEEE;
+  --text2: #888888;
+  --text3: #444444;
+  --purple: #A78BFA;
+  --purple-dark: #7C3AED;
+  --pink: #F472B6;
+  --pink-dark: #EC4899;
+  --blue: #60A5FA;
+  --green: #6EE7B7;
+  --yellow: #FCD34D;
+  --red: #F87171;
+  --grad: linear-gradient(135deg, #7C3AED, #EC4899);
+  --grad-soft: linear-gradient(135deg, #7C3AED22, #EC489922);
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, sans-serif;
   background: var(--bg);
   color: var(--text);
   font-size: 14px;
@@ -31,6 +35,6 @@ body {
 button { font-family: 'Inter', sans-serif; cursor: pointer; }
 input, select, textarea { font-family: 'Inter', sans-serif; }
 
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
