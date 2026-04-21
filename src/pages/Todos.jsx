@@ -1,126 +1,86 @@
-import { useState } from 'react'
-import styles from './Todos.module.css'
-
-const PRIO = {
-  h: { label: 'Hoch', cls: styles.prioH },
-  m: { label: 'Mittel', cls: styles.prioM },
-  l: { label: 'Niedrig', cls: styles.prioL },
-}
-
-const INITIAL = {
-  day: [
-    { id: 1, text: 'Fotoshooting Outfit auswählen', prio: 'h', done: false },
-    { id: 2, text: 'Instagram Post planen', prio: 'm', done: false },
-    { id: 3, text: 'Lieferanten-Mail beantworten', prio: 'l', done: true },
-  ],
-  week: [
-    { id: 4, text: 'Lieferant für Stickerei kontaktieren', prio: 'h', done: false },
-    { id: 5, text: 'Preiskalkulation SS25 finalisieren', prio: 'm', done: false },
-    { id: 6, text: 'Website-Banner aktualisieren', prio: 'l', done: false },
-  ],
-}
-
-function TodoList({ items, onToggle, onDelete, onAdd, scope }) {
-  const [text, setText] = useState('')
-  const [prio, setPrio] = useState('m')
-  const open = items.filter(t => !t.done).length
-
-  const handleAdd = () => {
-    if (!text.trim()) return
-    onAdd(scope, text.trim(), prio)
-    setText('')
-  }
-
-  return (
-    <div className={styles.block}>
-      <div className={styles.blockHead}>
-        <span className={styles.blockTitle}>
-          {scope === 'day' ? 'Heute' : 'Diese Woche'}
-        </span>
-        <span className={`${styles.badge} ${scope === 'day' ? styles.badgeDay : styles.badgeWeek}`}>
-          {open} offen
-        </span>
-      </div>
-
-      <div className={styles.list}>
-        {items.map(item => (
-          <div key={item.id} className={`${styles.item} ${item.done ? styles.done : ''}`}>
-            <button
-              className={`${styles.check} ${item.done ? styles.checked : ''}`}
-              onClick={() => onToggle(scope, item.id)}
-            >
-              {item.done ? '✓' : ''}
-            </button>
-            <div className={styles.itemBody}>
-              <div className={`${styles.itemText} ${item.done ? styles.strikethrough : ''}`}>
-                {item.text}
-              </div>
-              <span className={`${styles.prioTag} ${PRIO[item.prio].cls}`}>
-                {PRIO[item.prio].label}
-              </span>
-            </div>
-            <button className={styles.del} onClick={() => onDelete(scope, item.id)}>✕</button>
-          </div>
-        ))}
-        {items.length === 0 && (
-          <p className={styles.empty}>Keine Aufgaben. Gut gemacht! 🎉</p>
-        )}
-      </div>
-
-      <div className={styles.addRow}>
-        <input
-          type="text"
-          placeholder="Neue Aufgabe…"
-          value={text}
-          onChange={e => setText(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handleAdd()}
-          className={styles.input}
-        />
-        <select
-          value={prio}
-          onChange={e => setPrio(e.target.value)}
-          className={styles.select}
-        >
-          <option value="l">Niedrig</option>
-          <option value="m">Mittel</option>
-          <option value="h">Hoch</option>
-        </select>
-        <button className={styles.btn} onClick={handleAdd}>+</button>
-      </div>
-    </div>
-  )
-}
+import { useEffect, useState } from 'react'
+import { supabase } from '../supabaseClient'
 
 export default function Todos() {
-  const [todos, setTodos] = useState(INITIAL)
-  const [nextId, setNextId] = useState(10)
+  const [todos, setTodos] = useState([])
+  const [newTodo, setNewTodo] = useState('')
 
-  const toggle = (scope, id) => {
-    setTodos(prev => ({
-      ...prev,
-      [scope]: prev[scope].map(t => t.id === id ? { ...t, done: !t.done } : t)
-    }))
+  useEffect(() => {
+    fetchTodos()
+  }, [])
+
+  // 📥 Todos laden
+  async function fetchTodos() {
+    const { data, error } = await supabase
+      .from('todos')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      console.error('Fehler beim Laden:', error)
+    } else {
+      setTodos(data)
+    }
   }
 
-  const del = (scope, id) => {
-    setTodos(prev => ({
-      ...prev,
-      [scope]: prev[scope].filter(t => t.id !== id)
-    }))
+  // ➕ Todo hinzufügen
+  async function addTodo(e) {
+    e.preventDefault()
+
+    if (!newTodo) return
+
+    const { error } = await supabase
+      .from('todos')
+      .insert([{ text: newTodo }])
+
+    if (error) {
+      console.error('Fehler beim Hinzufügen:', error)
+    } else {
+      setNewTodo('')
+      fetchTodos()
+    }
   }
 
-  const add = (scope, text, prio) => {
-    setTodos(prev => ({
-      ...prev,
-      [scope]: [{ id: nextId, text, prio, done: false }, ...prev[scope]]
-    }))
-    setNextId(n => n + 1)
+  // ❌ Todo löschen
+  async function deleteTodo(id) {
+    const { error } = await supabase
+      .from('todos')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      console.error('Fehler beim Löschen:', error)
+    } else {
+      fetchTodos()
+    }
   }
 
   return (
-    <div className={styles.grid}>
-      <TodoList items={todos.day} onToggle={toggle} onDelete={del} onAdd={add} scope="day" />
-      <TodoList items={todos.week} onToggle={toggle} onDelete={del} onAdd={add} scope="week" />
+    <div style={{ padding: '20px' }}>
+      <h2>📝 Todos</h2>
+
+      {/* ➕ Formular */}
+      <form onSubmit={addTodo}>
+        <input
+          type="text"
+          placeholder="Neues Todo..."
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+        />
+        <button type="submit">Add</button>
+      </form>
+
+      {/* 📋 Liste */}
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.text}
+            <button onClick={() => deleteTodo(todo.id)}>
+              ❌
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
