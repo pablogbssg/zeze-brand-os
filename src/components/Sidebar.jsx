@@ -12,10 +12,9 @@ const s = {
   section: { fontSize: '10px', fontWeight: 600, color: 'var(--text3)', letterSpacing: '0.07em', textTransform: 'uppercase', padding: '10px 10px 6px' },
   navBase: { display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', borderRadius: '10px', border: 'none', background: 'transparent', color: 'var(--text2)', fontSize: '13px', fontWeight: 400, width: '100%', textAlign: 'left', cursor: 'pointer', transition: '0.12s' },
   dot: (color) => ({ width: '8px', height: '8px', borderRadius: '50%', background: color, flexShrink: 0 }),
-  footer: { marginTop: 'auto', fontSize: '11px', color: 'var(--text3)', padding: '0 10px', paddingTop: '20px' },
 }
 
-export default function Sidebar({ current, onChange }) {
+export default function Sidebar({ current, onChange, onLogout }) {
   return (
     <aside style={s.sidebar}>
       <div style={s.logoArea}>
@@ -44,7 +43,20 @@ export default function Sidebar({ current, onChange }) {
         </button>
       ))}
 
-      <div style={s.footer}>ZEZE © {new Date().getFullYear()}</div>
+      <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: '1px solid var(--border)' }}>
+        <button
+          onClick={onLogout}
+          style={{ ...s.navBase, color: 'var(--red)', width: '100%' }}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--red2)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+        >
+          <span style={{ fontSize: '14px' }}>⎋</span>
+          Ausloggen
+        </button>
+        <div style={{ fontSize: '11px', color: 'var(--text3)', padding: '8px 10px 0' }}>
+          ZEZE © {new Date().getFullYear()}
+        </div>
+      </div>
     </aside>
   )
 }
