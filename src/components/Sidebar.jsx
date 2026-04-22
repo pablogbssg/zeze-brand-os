@@ -1,7 +1,8 @@
 const NAV = [
-  { id: 'dashboard', label: 'Dashboard',    color: 'linear-gradient(135deg,#7C3AED,#EC4899)' },
-  { id: 'todos',     label: 'Aufgaben',     color: '#F472B6' },
-  { id: 'files',     label: 'Design Files', color: '#A78BFA' },
+  { id:'dashboard', label:'Dashboard',    color:'linear-gradient(135deg,#7C3AED,#EC4899)' },
+  { id:'board',     label:'Board',        color:'#FCD34D' },
+  { id:'todos',     label:'Aufgaben',     color:'#F472B6' },
+  { id:'files',     label:'Design Files', color:'#A78BFA' },
 ]
 
 export default function Sidebar({ current, onChange, onLogout }) {
@@ -24,7 +25,7 @@ export default function Sidebar({ current, onChange, onLogout }) {
 
       {NAV.map(item => (
         <button key={item.id} onClick={() => onChange(item.id)}
-          style={{ display:'flex', alignItems:'center', gap:'9px', padding:'9px 10px', borderRadius:'10px', border:'none', fontSize:'12px', fontWeight: current===item.id ? 500 : 400, color: current===item.id ? '#fff' : '#666', background: current===item.id ? 'linear-gradient(135deg,#7C3AED22,#EC489944)' : 'transparent', width:'100%', textAlign:'left', cursor:'pointer', transition:'.15s' }}>
+          style={{ display:'flex', alignItems:'center', gap:'9px', padding:'9px 10px', borderRadius:'10px', border:'none', fontSize:'12px', fontWeight:current===item.id?500:400, color:current===item.id?'#fff':'#666', background:current===item.id?'linear-gradient(135deg,#7C3AED22,#EC489944)':'transparent', width:'100%', textAlign:'left', cursor:'pointer', transition:'.15s' }}>
           <span style={{ width:7, height:7, borderRadius:'50%', background:item.color, flexShrink:0, display:'block' }} />
           {item.label}
         </button>
@@ -33,8 +34,8 @@ export default function Sidebar({ current, onChange, onLogout }) {
       <div style={{ marginTop:'auto', paddingTop:'16px', borderTop:'1px solid #1a1a1a' }}>
         <button onClick={onLogout}
           style={{ display:'flex', alignItems:'center', gap:'9px', padding:'9px 10px', borderRadius:'10px', border:'none', background:'transparent', color:'#555', fontSize:'12px', width:'100%', cursor:'pointer' }}
-          onMouseEnter={e => { e.currentTarget.style.background='#1a0a0a'; e.currentTarget.style.color='#F87171' }}
-          onMouseLeave={e => { e.currentTarget.style.background='transparent'; e.currentTarget.style.color='#555' }}>
+          onMouseEnter={e=>{e.currentTarget.style.background='#1a0a0a';e.currentTarget.style.color='#F87171'}}
+          onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.color='#555'}}>
           <span style={{ fontSize:'14px' }}>⎋</span> Ausloggen
         </button>
         <div style={{ fontSize:'10px', color:'#333', padding:'6px 10px' }}>ZEZE © {new Date().getFullYear()}</div>
