@@ -14,6 +14,12 @@ export default function App() {
   const [page, setPage]         = useState('dashboard')
   const [session, setSession]   = useState(null)
   const [checking, setChecking] = useState(true)
+  const [theme, setTheme]       = useState(() => localStorage.getItem('zeze-theme') || 'dark')
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('zeze-theme', theme)
+  }, [theme])
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => { setSession(session); setChecking(false) })
@@ -21,9 +27,11 @@ export default function App() {
     return () => subscription.unsubscribe()
   }, [])
 
+  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark')
+
   if (checking) return (
-    <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'#0D0D0D' }}>
-      <p style={{ color:'#444', fontSize:13 }}>Laden…</p>
+    <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'var(--bg)' }}>
+      <p style={{ color:'var(--text3)', fontSize:13 }}>Laden…</p>
     </div>
   )
 
@@ -31,7 +39,7 @@ export default function App() {
 
   return (
     <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', minHeight:'100vh' }}>
-      <Sidebar current={page} onChange={setPage} onLogout={() => supabase.auth.signOut()} />
+      <Sidebar current={page} onChange={setPage} onLogout={() => supabase.auth.signOut()} theme={theme} onToggleTheme={toggleTheme} />
       <div style={{ display:'flex', flexDirection:'column', minHeight:'100vh', overflow:'hidden' }}>
         <Topbar title={TITLES[page]} />
         <div style={{ flex:1, padding:'20px 28px 32px', overflowY:'auto' }}>
