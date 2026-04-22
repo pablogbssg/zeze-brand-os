@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard.jsx'
 import Files from './pages/Files.jsx'
 import Todos from './pages/Todos.jsx'
 import Board from './pages/Board.jsx'
+import TechPack from './pages/TechPack.jsx'
 import Login from './pages/Login.jsx'
 
 export default function App() {
@@ -46,6 +47,7 @@ export default function App() {
         {page==='todos'     && <Todos />}
         {page==='files'     && <Files />}
         {page==='board'     && <Board />}
+        {page==='techpack'  && <TechPack />}
       </div>
     </div>
   )
